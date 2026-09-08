@@ -1,0 +1,111 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>DOM TECNOLOGIA - ULTRA 15 COMPLETO</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bass:0;--mx:50%;--my:50%;--flash-x:50%;--flash-y:0%}
+body{font-family:'Poppins',sans-serif;background:#050508;color:#fff;overflow-x:hidden}
+@keyframes rgb{0%{background-position:0% 50%}100%{background-position:400% 50%}}
+@keyframes flicker{0%,18%,22%,25%,53%,57%,100%{opacity:1;text-shadow:0 0 10px #ff00ff}20%,24%,55%{opacity:.6}}
+.neon{animation:flicker 3s linear infinite}
+#bgLava{position:fixed;inset:-50%;z-index:-5;background:linear-gradient(45deg,#ff00ff,#00ffff,#ff4400,#ffff00,#ff00ff);background-size:600% 600%;animation:rgb 4s linear infinite;filter:blur(80px) brightness(calc(.8 + var(--bass)));opacity:.4;transform:scale(calc(1 + var(--bass)*0.15))}
+#aurora{position:fixed;top:0;left:0;width:100%;height:45%;z-index:-2;pointer-events:none;opacity:.6;filter:blur(20px)}
+#matrixCanvas,#fireCanvas,#smokeCanvas,#plasmaCanvas{position:fixed;inset:0;pointer-events:none}
+#matrixCanvas{z-index:-3;opacity:.2} #fireCanvas{z-index:-2;opacity:.5} #smokeCanvas{z-index:-2;opacity:.3;filter:blur(2px)} #plasmaCanvas{z-index:-1;opacity:.4}
+#spotlight{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle 350px at var(--mx) var(--my),transparent 0%,rgba(0,0,0,.85) 80%);mix-blend-mode:multiply}
+.laser{position:fixed;width:2px;height:100%;top:0;z-index:2;pointer-events:none;opacity:.5;transform-origin:top}
+.l1{left:22%;background:linear-gradient(#ff00ff,transparent);box-shadow:0 0 10px #ff00ff;animation:laser 2s ease-in-out infinite alternate;transform:rotate(15deg)}
+.l2{left:50%;background:linear-gradient(#00ffff,transparent);box-shadow:0 0 10px #00ffff;animation:laser 2.3s ease-in-out infinite alternate-reverse;transform:rotate(-10deg)}
+.l3{left:78%;background:linear-gradient(#ffff00,transparent);box-shadow:0 0 10px #ffff00;animation:laser 1.8s ease-in-out infinite alternate;transform:rotate(8deg)}
+@keyframes laser{0%{height:0%;opacity:0}100%{height:100%;opacity:.7}}
+#lightning{position:fixed;inset:0;z-index:4;pointer-events:none;opacity:0;transition:opacity.08s} #lightning.flash{opacity:1}
+.lightning-bolt{stroke:#7ec8ff;stroke-width:1.8;fill:none;filter:drop-shadow(0 0 6px #00aaff) drop-shadow(0 0 12px #0088ff) drop-shadow(0 0 25px #00aaff);stroke-linecap:round;opacity:.9}
+.flash-bg{position:fixed;inset:0;z-index:3;pointer-events:none;background:radial-gradient(circle at var(--flash-x) var(--flash-y),rgba(120,200,255,.7),rgba(0,100,255,.15) 40%,transparent 70%);opacity:0}.flash-bg.on{animation:flashBg.35s ease} @keyframes flashBg{0%{opacity:0}15%{opacity:.6}100%{opacity:0}}
+.shake{animation:shake.2s linear} @keyframes shake{0%,100%{transform:translate(0,0)}25%{transform:translate(-3px,2px)}50%{transform:translate(3px,-2px)}75%{transform:translate(-2px,-3px)}}
+.spark{position:fixed;width:4px;height:4px;background:#ffcc00;border-radius:50%;pointer-events:none;z-index:10;box-shadow:0 0 6px #ffcc00}
+.rgb-text{background:linear-gradient(90deg,#ff00ff,#00ffff,#ffff00,#ff00ff);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:rgb 1.5s linear infinite}
+.trail{position:fixed;width:14px;height:14px;border-radius:50%;pointer-events:none;z-index:9999;background:radial-gradient(circle,#fff 0%,var(--c) 60%);mix-blend-mode:screen;box-shadow:0 0 15px var(--c);transform:translate(-50%,-50%) scale(calc(1 + var(--bass)*1.2))}
+.rgb-border{background:linear-gradient(90deg,#ff00ff,#00ffff,#ffff00,#ff00ff);background-size:400% 400%;animation:rgb 1s linear infinite;padding:3px;border-radius:20px;transform:scale(calc(1 + var(--bass)*0.03));box-shadow:0 0 calc(5px + var(--bass)*25px) #a855f7}
+.rgb-inner{background:rgba(10,10,18,0.95);border-radius:17px;padding:20px;height:100%}
+.btn-whats{background:linear-gradient(90deg,#25D366,#00ffff,#ff00ff,#ffff00,#25D366);background-size:400% 400%;animation:rgb.8s linear infinite;color:#fff;padding:14px 24px;border-radius:30px;text-decoration:none;font-weight:800;display:inline-flex;gap:8px;transform:scale(calc(1 + var(--bass)*0.07))}
+.liquid{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;mix-blend-mode:screen}.b1{width:700px;height:700px;background:radial-gradient(circle,#a855f7,#ff00ff);left:-150px;top:-150px;animation:f1 12s infinite}.b2{width:600px;height:600px;background:radial-gradient(circle,#00ffff,#0066ff);right:-100px;top:20%;animation:f2 14s infinite}.b3{width:800px;height:800px;background:radial-gradient(circle,#ff00cc,#ffaa00);left:30%;bottom:-300px;animation:f1 16s infinite reverse} @keyframes f1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(100px,80px) scale(1.1)}} @keyframes f2{0%,100%{transform:translate(0,0)}50%{transform:translate(-100px,-80px) scale(1.2)}}
+.glitch{position:relative;text-shadow:0 0 20px #ff00ff}.glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden}.glitch::before{left:-2px;text-shadow:2px 0 #ff0000;clip-path:inset(20% 0 60% 0);animation:g1 2s infinite linear alternate-reverse}.glitch::after{left:2px;text-shadow:-2px 0 #00ffff;clip-path:inset(60% 0 20% 0);animation:g2 1.5s infinite linear alternate-reverse} @keyframes g1{0%{clip-path:inset(10% 0 80% 0)}100%{clip-path:inset(40% 0 30% 0)}} @keyframes g2{0%{clip-path:inset(60% 0 20% 0)}100%{clip-path:inset(30% 0 50% 0)}}
+.container{max-width:1150px;margin:0 auto;padding:0 20px;position:relative;z-index:2}
+.header{padding:25px 0;display:flex;justify-content:space-between;align-items:center}.logo{font-family:'Unbounded',sans-serif;font-weight:900;font-size:20px}.logo span{color:#a855f7}.live{font-size:11px;background:#00ff88;color:#000;padding:6px 12px;border-radius:20px;font-weight:800;animation:pulse 1s infinite} @keyframes pulse{0%,100%{box-shadow:0 0 0 0 #00ff88}50%{box-shadow:0 0 0 8px rgba(0,255,136,0)}}
+.hero{display:grid;grid-template-columns:1.1fr.9fr;gap:20px;align-items:center;padding:20px 0 40px 0}
+.hero-img{border-radius:24px;overflow:hidden;box-shadow:0 0 40px #ff00ff,0 0 80px #00ffff;transform:rotate(-1deg) scale(calc(1 + var(--bass)*0.03));background:linear-gradient(90deg,#ff00ff,#00ffff,#ffff00,#ff00ff);background-size:400% 400%;animation:rgb 1s linear infinite;padding:3px}
+.hero-img-inner{border-radius:21px;overflow:hidden;background:#000}.hero-img img{width:100%;height:650px;object-fit:cover;display:block}
+.hero-text h1{font-family:'Unbounded',sans-serif;font-size:44px;line-height:.9}.hero-text p{color:#aaa;margin:15px 0;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.stat{background:rgba(0,0,0,.6);border:1px solid #00ffff;border-radius:12px;padding:10px;text-align:center}.stat b{color:#00ffff;display:block}
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:40px 0}.card.popular{transform:scale(1.05);z-index:2}.badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#ffcc00,#ff8800);color:#000;padding:6px 18px;border-radius:20px;font-weight:900;font-size:11px;z-index:3}
+.music-fab{position:fixed;bottom:22px;right:22px;z-index:9999;width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,#ff00ff,#00ffff);border:0;font-size:26px;cursor:pointer;box-shadow:0 0 25px #ff00ff;transform:scale(calc(1 + var(--bass)*0.25));display:flex;align-items:center;justify-content:center}
+.music-panel{position:fixed;bottom:90px;right:22px;z-index:9998;width:380px;max-width:93vw;background:rgba(10,10,15,0.98);border-radius:24px;padding:18px;transform:translateY(20px) scale(0.9);opacity:0;pointer-events:none;transition:.35s;border:2px solid #a855f7}.music-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all}
+.rock-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.rock-btn{padding:10px;border-radius:12px;border:1px solid #333;background:#1a1a1a;color:#fff;font-weight:700;cursor:pointer;font-size:11px}.rock-btn.active{background:linear-gradient(90deg,#ff00ff,#00ffff);color:#000}
+.bass-bar{height:5px;background:#222;border-radius:10px;overflow:hidden;margin-top:10px}.bass-fill{height:100%;width:0%;background:linear-gradient(90deg,#ff00ff,#00ffff);transition:width.08s}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-img img{height:450px}.pricing{grid-template-columns:1fr}.card.popular{transform:scale(1)}.trail,#spotlight,.laser{display:none}}
+</style>
+</head>
+<body id="body">
+<div id="bgLava"></div><div class="liquid"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<canvas id="aurora"></canvas><canvas id="matrixCanvas"></canvas><canvas id="fireCanvas"></canvas><canvas id="smokeCanvas"></canvas><canvas id="plasmaCanvas"></canvas>
+<div id="spotlight"></div><div class="laser l1"></div><div class="laser l2"></div><div class="laser l3"></div><div id="lightning"></div><div class="flash-bg" id="flashBg"></div>
+
+<div class="container">
+<div class="header"><div class="logo glitch" data-text="DOM TECNOLOGIA">DOM <span>TECNOLOGIA</span></div><div class="live">● 2 VAGAS RESTANTES EM SETEMBRO</div></div>
+<div class="hero">
+<div class="hero-text"><h1 class="glitch neon" data-text="SEU SITE NÃO VENDE? COLOCA RGB QUE VENDE.">SEU SITE NÃO VENDE? <span class="rgb-text">COLOCA RGB QUE VENDE.</span></h1><p>Site morto branco ninguém lembra. Site RGB Premium o cliente entra, a borda pulsa na música, o logo dá glitch e ele mostra pros amigos. Igual Apple e Nike estão usando em 2026.</p><a href="https://wa.me/5546991219785?text=Quero%20meu%20site%20RGB%20AGORA" class="btn-whats">📲 QUERO MEU SITE RGB AGORA →</a><div class="stats"><div class="stat"><b>⚡ +40%</b><span>TEMPO</span></div><div class="stat"><b>🕐 24H</b><span>ENTREGA</span></div><div class="stat"><b>🏪 127</b><span>LOJAS</span></div><div class="stat"><b>⭐ 4.9★</b><span>NOTA</span></div></div></div>
+<div class="hero-img"><div class="hero-img-inner"><img src="loira.jpg" alt="DOM Tecnologia"></div></div>
+</div>
+<div class="pricing">
+<div class="rgb-border"><div class="rgb-inner"><h3>START RGB</h3><div style="font-family:'Unbounded',sans-serif;font-size:32px;color:#00ffff;margin:10px 0">R$ 997</div><ul style="list-style:none;color:#bbb;font-size:13px"><li>✓ 1 Efeito RGB Premium</li><li>✓ Botão WhatsApp</li><li>✓ Entrega 24H</li><li>✓ Hospedagem Vercel</li></ul><a href="https://wa.me/5546991219785" class="btn-whats" style="width:100%;justify-content:center;margin-top:15px;background:#222">ESCOLHER START</a></div></div>
+<div class="rgb-border card popular" style="position:relative"><div class="badge">👑 MAIS VENDIDO</div><div class="rgb-inner" style="background:linear-gradient(180deg,#1a1525,#0f0f12)"><h3>SITE PREMIUM</h3><div style="font-family:'Unbounded',sans-serif;font-size:36px;color:#ff88ff;margin:10px 0">R$ 2.200</div><ul style="list-style:none;color:#bbb;font-size:13px"><li>✓ 6 EFEITOS RGB</li><li>✓ BATE COM MÚSICA 🎵</li><li>✓ Botão que pulsa com som da loja</li><li>✓ Domínio + SSL</li><li>✓ Pixel + Google Meu Negócio</li></ul><a href="https://wa.me/5546991219785" class="btn-whats" style="width:100%;justify-content:center;margin-top:15px">🚀 QUERO O MAIS VENDIDO</a></div></div>
+<div class="rgb-border"><div class="rgb-inner"><h3>ULTRA SITE</h3><div style="font-family:'Unbounded',sans-serif;font-size:32px;margin:10px 0">R$ 4.500</div><ul style="list-style:none;color:#bbb;font-size:13px"><li>✓ 15 EFEITOS + PARTÍCULAS</li><li>✓ Loja + PIX + Carrinho</li><li>✓ Música da sua loja</li><li>✓ Suporte 24/7</li></ul><a href="https://wa.me/5546991219785" class="btn-whats" style="width:100%;justify-content:center;margin-top:15px;background:#fff;color:#000">ESCOLHER ULTRA</a></div></div>
+</div>
+<div style="text-align:center;padding:40px 0"><h2 class="glitch" style="font-family:'Unbounded',sans-serif;font-size:32px" data-text="ÚLTIMAS 2 VAGAS">ÚLTIMAS <span class="rgb-text">2 VAGAS</span> DE SETEMBRO</h2><a href="https://wa.me/5546991219785" class="btn-whats" style="margin-top:20px;font-size:18px;padding:18px 40px">📲 RESERVAR VAGA NO WHATSAPP</a></div>
+</div>
+
+<button class="music-fab" id="fabBtn">🎵</button>
+<div class="music-panel" id="musicPanel">
+<div style="display:flex;justify-content:space-between"><h4 style="font-family:'Unbounded',sans-serif;font-size:11px">🤘 ULTRA 15 + MÚSICAS</h4><button onclick="document.getElementById('musicPanel').classList.remove('open')" style="background:#222;border:0;color:#fff;width:26px;height:26px;border-radius:50%">✕</button></div>
+<div class="rock-grid"><button class="rock-btn" onclick="playTrack('metallica.mp3',this)">🤘 Enter Sandman</button><button class="rock-btn" onclick="playTrack('acdc.mp3',this)">⚡ Back in Black</button><button class="rock-btn" onclick="playTrack('guns.mp3',this)">🔥 Sweet Child</button><button class="rock-btn" onclick="playTrack('nirvana.mp3',this)">💀 Teen Spirit</button></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px"><button style="background:#00ff88;color:#000;padding:8px 14px;border-radius:20px;border:0;font-weight:800" id="playBtn">▶️ PLAY</button><button style="background:#a855f7;color:#fff;padding:8px 14px;border-radius:20px;border:0" id="micBtn">🎤 LOJA</button><input type="file" id="fileInput" accept="audio/*" style="display:none"><label for="fileInput" style="background:#fff;color:#000;padding:8px 12px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer">📁 SUA MÚSICA</label><span id="musicName" style="font-size:10px;color:#aaa;flex:1">escolha a música</span></div>
+<div class="bass-bar"><div class="bass-fill" id="bassFill"></div></div>
+<p style="font-size:9px;color:#666;margin-top:8px">O site inteiro pulsa no grave + Raio azul + Shake + Fogo + Plasma + Trail</p>
+<audio id="audio" loop></audio>
+</div>
+
+<script>
+// EFEITOS MOUSE - TRAIL + SPOTLIGHT + FAISCA
+const colors=['#ff00ff','#00ffff','#ffff00','#00ff00','#ff0000'];let trails=[];for(let i=0;i<10;i++){let d=document.createElement('div');d.className='trail';d.style.setProperty('--c',colors[i%colors.length]);d.style.width=d.style.height=(14-i)+'px';document.body.appendChild(d);trails.push(d);}
+let mx=0,my=0,tx=0,ty=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;document.documentElement.style.setProperty('--mx',mx+'px');document.documentElement.style.setProperty('--my',my+'px');if(Math.random()>0.7){let s=document.createElement('div');s.className='spark';s.style.left=mx+'px';s.style.top=my+'px';document.body.appendChild(s);let vx=(Math.random()-.5)*12,vy=(Math.random()-.5)*12,life=1;(function anim(){life-=0.04;mx+=vx;my+=vy;vy+=0.3;s.style.left=mx+'px';s.style.top=my+'px';s.style.opacity=life;if(life>0)requestAnimationFrame(anim);else s.remove();})();}});
+(function animTrail(){tx+=(mx-tx)*0.22;ty+=(my-ty)*0.22;trails.forEach((t,i)=>{let x=tx-(mx-tx)*i*0.15;let y=ty-(my-ty)*i*0.15;t.style.left=x+'px';t.style.top=y+'px';});requestAnimationFrame(animTrail);})();
+
+// AUDIO + BASS REATIVO
+const fabBtn=document.getElementById('fabBtn'),musicPanel=document.getElementById('musicPanel');fabBtn.onclick=()=>{musicPanel.classList.toggle('open');fabBtn.textContent=musicPanel.classList.contains('open')?'🔽':'🎵';};
+const audio=document.getElementById('audio'),playBtn=document.getElementById('playBtn'),micBtn=document.getElementById('micBtn'),musicName=document.getElementById('musicName'),fileInput=document.getElementById('fileInput'),bassFill=document.getElementById('bassFill');
+let ctx,analyser,dataArray,source,isMic=false;
+function setupAudio(){if(ctx)return;ctx=new(window.AudioContext||window.webkitAudioContext)();analyser=ctx.createAnalyser();analyser.fftSize=256;dataArray=new Uint8Array(analyser.frequencyBinCount);if(!isMic){source=ctx.createMediaElementSource(audio);source.connect(analyser);analyser.connect(ctx.destination);}}
+function loop(){if(!analyser){requestAnimationFrame(loop);return;}analyser.getByteFrequencyData(dataArray);let bass=0;for(let i=0;i<10;i++)bass+=dataArray[i];bass/=10;bass/=255;document.documentElement.style.setProperty('--bass',bass.toFixed(3));if(bassFill)bassFill.style.width=(bass*100).toFixed(0)+'%';if(bass>0.6){triggerLightning(bass);if(bass>0.75)shakeScreen();}requestAnimationFrame(loop);}
+async function playTrack(file,btn){document.querySelectorAll('.rock-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');setupAudio();isMic=false;audio.src=file;musicName.textContent=file;try{await ctx.resume();await audio.play();playBtn.textContent='⏸️ PAUSAR';loop();}catch(e){alert('Coloca '+file+' na pasta ou usa 📁 SUA MÚSICA');}}
+playBtn.onclick=async()=>{if(!audio.src){alert('Escolhe música 🤘');musicPanel.classList.add('open');return;}setupAudio();if(audio.paused){await ctx.resume();await audio.play();playBtn.textContent='⏸️ PAUSAR';loop();}else{audio.pause();playBtn.textContent='▶️ PLAY';}};
+micBtn.onclick=async()=>{setupAudio();isMic=true;try{const stream=await navigator.mediaDevices.getUserMedia({audio:true});if(source)source.disconnect();source=ctx.createMediaStreamSource(stream);source.connect(analyser);musicName.textContent='🎤 Microfone da Loja';micBtn.textContent='🎤 OUVINDO';await ctx.resume();loop();}catch{alert('Permita microfone');}};
+fileInput.onchange=e=>{const file=e.target.files[0];if(!file)return;audio.src=URL.createObjectURL(file);musicName.textContent=file.name;setupAudio();isMic=false;ctx.resume().then(()=>{audio.play();playBtn.textContent='⏸️ PAUSAR';loop();});};
+
+// FOGO
+const fireCanvas=document.getElementById('fireCanvas'),fctx=fireCanvas.getContext('2d');function rf(){fireCanvas.width=innerWidth;fireCanvas.height=innerHeight}rf();addEventListener('resize',rf);let fireParts=[];for(let i=0;i<90;i++)fireParts.push({x:Math.random()*innerWidth,y:innerHeight+Math.random()*200,r:Math.random()*6+3,vx:(Math.random()-.5)*2,vy:-Math.random()*3-1.5,life:Math.random()});(function animFire(){fctx.clearRect(0,0,fireCanvas.width,fireCanvas.height);let bass=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bass'))||0.15;fireParts.forEach(p=>{p.x+=p.vx*(1+bass*2);p.y+=p.vy*(1+bass*3);p.life-=0.008;if(p.life<=0||p.y<-50){p.x=Math.random()*fireCanvas.width;p.y=fireCanvas.height+20;p.life=1;}let a=p.life*0.6;let g=fctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*(1+bass*2));g.addColorStop(0,`rgba(255,255,200,${a})`);g.addColorStop(0.2,`rgba(255,200,0,${a})`);g.addColorStop(0.5,`rgba(255,80,0,${a})`);g.addColorStop(1,`rgba(180,0,0,0)`);fctx.fillStyle=g;fctx.beginPath();fctx.arc(p.x,p.y,p.r*(1+bass*1.5),0,Math.PI*2);fctx.fill();});requestAnimationFrame(animFire);})();
+
+// PLASMA
+const plasmaCanvas=document.getElementById('plasmaCanvas'),pctx=plasmaCanvas.getContext('2d');function rp(){plasmaCanvas.width=innerWidth;plasmaCanvas.height=innerHeight}rp();addEventListener('resize',rp);(function animPlasma(){pctx.clearRect(0,0,plasmaCanvas.width,plasmaCanvas.height);let bass=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bass'))||0.15;let cx=mx||innerWidth/2,cy=my||innerHeight/2;pctx.beginPath();pctx.arc(cx,cy,80+bass*100,0,Math.PI*2);let grad=pctx.createRadialGradient(cx,cy,0,cx,cy,80+bass*100);grad.addColorStop(0,`rgba(255,255,255,${0.3+bass*0.3})`);grad.addColorStop(0.3,`rgba(168,85,247,${0.3})`);grad.addColorStop(1,`rgba(0,255,255,0)`);pctx.fillStyle=grad;pctx.fill();requestAnimationFrame(animPlasma);})();
+
+// RAIO + SHAKE
+const lightning=document.getElementById('lightning'),flashBg=document.getElementById('flashBg'),body=document.getElementById('body');let lastBolt=0;
+function triggerLightning(intensity=1){let now=Date.now();if(now-lastBolt<400)return;lastBolt=now;lightning.innerHTML='';let svgNS="http://www.w3.org/2000/svg";let svg=document.createElementNS(svgNS,"svg");svg.setAttribute("viewBox","0 0 100 100");svg.setAttribute("preserveAspectRatio","none");svg.style.width="100%";svg.style.height="100%";let startX=10+Math.random()*80;let endX=startX+(Math.random()-0.5)*25;function generateBolt(x1,y1,x2,y2,segments,displace){let points=[{x:x1,y:y1}];for(let i=1;i<segments;i++){let t=i/segments;let x=x1+(x2-x1)*t+(Math.random()-0.5)*displace;let y=y1+(y2-y1)*t+(Math.random()-0.5)*displace*0.3;if(i>1)x+=(Math.random()-0.5)*12;points.push({x,y});}points.push({x:x2,y:y2});let d=`M ${points[0].x} ${points[0].y} `;for(let i=1;i<points.length;i++)d+=`L ${points[i].x} ${points[i].y} `;return {d,points};}let main=generateBolt(startX,0,endX,90,18,10);let mainPath=document.createElementNS(svgNS,"path");mainPath.setAttribute("d",main.d);mainPath.setAttribute("class","lightning-bolt");svg.appendChild(mainPath);lightning.appendChild(svg);document.documentElement.style.setProperty('--flash-x',startX+'%');lightning.classList.add('flash');flashBg.classList.add('on');setTimeout(()=>{lightning.classList.remove('flash');flashBg.classList.remove('on');},250+intensity*120);}
+function shakeScreen(){body.classList.remove('shake');void body.offsetWidth;body.classList.add('shake');setTimeout(()=>body.classList.remove('shake'),250);}
+setInterval(()=>{if(Math.random()>0.6)triggerLightning(0.8);},3000);
+setInterval(()=>{if(!analyser||audio.paused){let fake=0.15+Math.random()*0.25;document.documentElement.style.setProperty('--bass',fake.toFixed(3));if(bassFill)bassFill.style.width=(fake*60).toFixed(0)+'%';}},180);
+</script>
+</body>
+</html>
