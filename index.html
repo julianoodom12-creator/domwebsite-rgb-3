@@ -4,6 +4,47 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>DOM TECNOLOGIA - ULTRA 15 COMPLETO</title>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<!-- 🔔 DOM TECNOLOGIA - PUSH RGB - OneSignal -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "6e583315-dcba-47c5-bf97-02a8798bb9c1",
+      notifyButton: {
+        enable: true,
+        size: 'large',
+        position: 'bottom-left',
+        offset: { bottom: '90px', left: '20px' },
+        showCredit: false,
+        colors: {
+          'circle.background': '#a855f7',
+          'circle.foreground': 'white',
+          'badge.background': '#00ffff',
+          'badge.foreground': 'black',
+          'pulse.background': '#a855f7'
+        },
+        text: {
+          'tip.state.unsubscribed': '🔔 Receber ofertas RGB',
+          'tip.state.subscribed': 'Você já recebe ofertas DOM',
+          'tip.state.blocked': 'Desbloqueie as notificações',
+          'message.prenotify': 'Clique para receber promoções RGB',
+          'message.action.subscribed': 'BOA! 🚀 Agora você recebe',
+          'message.action.resubscribe': 'Receber novamente',
+          'message.action.unsubscribed': 'Não receber mais',
+          'dialog.main.title': 'DOM TECNOLOGIA',
+          'dialog.main.button.subscribe': 'SIM, QUERO RGB 🔥',
+          'dialog.main.button.unsubscribe': 'NÃO',
+          'dialog.blocked.title': 'Desbloqueia o sininho',
+          'dialog.blocked.message': 'Clique para permitir notificações'
+        }
+      },
+      allowLocalhostAsSecureOrigin: true
+    });
+  });
+</script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bass:0;--mx:50%;--my:50%;--flash-x:50%;--flash-y:0%}
@@ -78,12 +119,12 @@ body{font-family:'Poppins',sans-serif;background:#050508;color:#fff;overflow-x:h
 </div>
 
 <script>
-// EFEITOS MOUSE - TRAIL + SPOTLIGHT + FAISCA
+// EFEITOS MOUSE
 const colors=['#ff00ff','#00ffff','#ffff00','#00ff00','#ff0000'];let trails=[];for(let i=0;i<10;i++){let d=document.createElement('div');d.className='trail';d.style.setProperty('--c',colors[i%colors.length]);d.style.width=d.style.height=(14-i)+'px';document.body.appendChild(d);trails.push(d);}
 let mx=0,my=0,tx=0,ty=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;document.documentElement.style.setProperty('--mx',mx+'px');document.documentElement.style.setProperty('--my',my+'px');if(Math.random()>0.7){let s=document.createElement('div');s.className='spark';s.style.left=mx+'px';s.style.top=my+'px';document.body.appendChild(s);let vx=(Math.random()-.5)*12,vy=(Math.random()-.5)*12,life=1;(function anim(){life-=0.04;mx+=vx;my+=vy;vy+=0.3;s.style.left=mx+'px';s.style.top=my+'px';s.style.opacity=life;if(life>0)requestAnimationFrame(anim);else s.remove();})();}});
 (function animTrail(){tx+=(mx-tx)*0.22;ty+=(my-ty)*0.22;trails.forEach((t,i)=>{let x=tx-(mx-tx)*i*0.15;let y=ty-(my-ty)*i*0.15;t.style.left=x+'px';t.style.top=y+'px';});requestAnimationFrame(animTrail);})();
 
-// AUDIO + BASS REATIVO
+// AUDIO + BASS
 const fabBtn=document.getElementById('fabBtn'),musicPanel=document.getElementById('musicPanel');fabBtn.onclick=()=>{musicPanel.classList.toggle('open');fabBtn.textContent=musicPanel.classList.contains('open')?'🔽':'🎵';};
 const audio=document.getElementById('audio'),playBtn=document.getElementById('playBtn'),micBtn=document.getElementById('micBtn'),musicName=document.getElementById('musicName'),fileInput=document.getElementById('fileInput'),bassFill=document.getElementById('bassFill');
 let ctx,analyser,dataArray,source,isMic=false;
